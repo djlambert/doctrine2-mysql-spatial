@@ -1,0 +1,16 @@
+{
+    "name": "creof/doctrine2-mysql-spatial",
+    "description": "Support for MySQL spatial types and functions",
+    "authors": [
+        {
+            "name": "Derek Lambert",
+            "email": "dlambert@dereklambert.com"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "CrEOF\\DBAL": "lib/" }
+    }
+}
