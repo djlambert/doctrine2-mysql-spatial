@@ -6,7 +6,7 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 /**
- * Mapping type for spatial POINT objects
+ * Doctrine type for MySQL spatial POINT objects
  */
 class PointType extends Type
 {

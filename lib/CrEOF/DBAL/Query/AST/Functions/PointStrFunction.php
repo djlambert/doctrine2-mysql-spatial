@@ -5,9 +5,9 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * POINT_STR function for querying using Point objects as parameters
+ * PointStr DQL function for querying using Point objects as parameters
  *
- * Usage: POINT_STR(:param) where param should be mapped to $point where $point is Wantlet\ORM\Point
+ * Usage: POINT_STR(:param) where param should be mapped to $point where $point is Point
  *        without any special typing provided (eg. so that it gets converted to string)
  */
 class PointStr extends FunctionNode
