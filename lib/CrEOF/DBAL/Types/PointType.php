@@ -47,7 +47,7 @@ class PointType extends Type
             return null;
         }
 
-        $data = unpack('x/x/x/x/corder/Ltype/dlat/dlon', $value);
+        $data = unpack('x/x/x/x/Corder/Ltype/dlat/dlon', $value);
         return new Point($data['lat'], $data['lon']);
     }
 
