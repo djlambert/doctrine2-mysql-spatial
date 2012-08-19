@@ -7,12 +7,19 @@ namespace CrEOF\PHP\Types;
  */
 class Point
 {
+    /**
+     * @var double $latitude
+     */
     private $latitude;
+
+    /**
+     * @var double $longitude
+     */
     private $longitude;
 
     /**
-     * @param $latitude
-     * @param $longitude
+     * @param mixed $latitude
+     * @param mixed $longitude
      */
     public function __construct($latitude, $longitude)
     {
@@ -21,7 +28,8 @@ class Point
     }
 
     /**
-     * @param $latitude
+     * @param mixed $latitude
+     *
      */
     public function setLatitude($latitude)
     {
@@ -29,7 +37,7 @@ class Point
     }
 
     /**
-     * @return mixed
+     * @return double
      */
     public function getLatitude()
     {
@@ -37,7 +45,8 @@ class Point
     }
 
     /**
-     * @param $longitude
+     * @param mixed $longitude
+     *
      */
     public function setLongitude($longitude)
     {
@@ -45,7 +54,7 @@ class Point
     }
 
     /**
-     * @return mixed
+     * @return double
      */
     public function getLongitude()
     {
