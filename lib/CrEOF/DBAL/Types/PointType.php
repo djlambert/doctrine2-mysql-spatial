@@ -37,8 +37,7 @@ class PointType extends Type
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        //Null fields come in as empty strings
-        if($value == '') {
+        if ($value === null) {
             return null;
         }
 
