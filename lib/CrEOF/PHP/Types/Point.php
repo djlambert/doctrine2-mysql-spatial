@@ -21,10 +21,12 @@ class Point
      * @param mixed $latitude
      * @param mixed $longitude
      */
-    public function __construct($latitude, $longitude)
+    public function __construct($latitude = null, $longitude = null)
     {
+        if ($latitude && $longitude) {
             $this->latitude = (double)$latitude;
             $this->longitude = (double)$longitude;
+        }
     }
 
     /**
