@@ -11,6 +11,7 @@
         "doctrine/orm": "dev-master"
     },
     "autoload": {
-        "psr-0": { "CrEOF\\DBAL": "lib/" }
+        "psr-0": {
+            "CrEOF": "lib/" }
     }
 }
