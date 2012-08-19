@@ -35,6 +35,12 @@ class PointType extends Type
         return 'POINT';
     }
 
+    /**
+     * @param string           $value
+     * @param AbstractPlatform $platform
+     *
+     * @return Point|null
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         if ($value === null) {
@@ -45,6 +51,12 @@ class PointType extends Type
         return new Point($data['lat'], $data['lon']);
     }
 
+    /**
+     * @param Point            $value
+     * @param AbstractPlatform $platform
+     *
+     * @return string|null
+     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (!$value) return;
