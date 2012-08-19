@@ -59,7 +59,9 @@ class PointType extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (!$value) return;
+        if ($value === null) {
+            return null;
+        }
 
         return pack('xxxxcLdd', '0', 1, $value->getLatitude(), $value->getLongitude());
     }
