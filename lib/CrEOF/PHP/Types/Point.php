@@ -1,40 +1,60 @@
 <?php
 
-namespace CrEOF\DBAL\Types;
+namespace CrEOF\PHP\Types;
+
 /**
- * Point object for spatial mapping
+ * Point object for MySQL spatial POINT type
  */
 class Point
 {
     private $latitude;
     private $longitude;
 
+    /**
+     * @param $latitude
+     * @param $longitude
+     */
     public function __construct($latitude, $longitude)
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
     }
 
-    public function setLatitude($x)
+    /**
+     * @param $latitude
+     */
+    public function setLatitude($latitude)
     {
-        $this->latitude = $x;
+        $this->latitude = $latitude;
     }
 
+    /**
+     * @return mixed
+     */
     public function getLatitude()
     {
         return $this->latitude;
     }
 
-    public function setLongitude($y)
+    /**
+     * @param $longitude
+     */
+    public function setLongitude($longitude)
     {
-        $this->longitude = $y;
+        $this->longitude = $longitude;
     }
 
+    /**
+     * @return mixed
+     */
     public function getLongitude()
     {
         return $this->longitude;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         //Output from this is used with POINT_STR in DQL so must be in specific format

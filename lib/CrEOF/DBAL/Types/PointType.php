@@ -1,6 +1,7 @@
 <?php
 namespace CrEOF\DBAL\Types;
 
+use CrEOF\PHP\Types\Point;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
