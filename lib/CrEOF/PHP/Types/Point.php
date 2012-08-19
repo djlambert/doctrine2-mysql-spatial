@@ -16,8 +16,8 @@ class Point
      */
     public function __construct($latitude, $longitude)
     {
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
+            $this->latitude = (double)$latitude;
+            $this->longitude = (double)$longitude;
     }
 
     /**
@@ -25,7 +25,7 @@ class Point
      */
     public function setLatitude($latitude)
     {
-        $this->latitude = $latitude;
+        $this->latitude = (double)$latitude;
     }
 
     /**
@@ -41,7 +41,7 @@ class Point
      */
     public function setLongitude($longitude)
     {
-        $this->longitude = $longitude;
+        $this->longitude = (double)$longitude;
     }
 
     /**
