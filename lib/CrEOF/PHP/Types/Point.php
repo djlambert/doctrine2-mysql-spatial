@@ -30,10 +30,12 @@ class Point
     /**
      * @param mixed $latitude
      *
+     * @return self
      */
     public function setLatitude($latitude)
     {
         $this->latitude = (double)$latitude;
+        return $this;
     }
 
     /**
@@ -47,10 +49,12 @@ class Point
     /**
      * @param mixed $longitude
      *
+     * @return self
      */
     public function setLongitude($longitude)
     {
         $this->longitude = (double)$longitude;
+        return $this;
     }
 
     /**
