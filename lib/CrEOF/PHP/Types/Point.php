@@ -30,7 +30,7 @@ class Point
         if (strpos($value, ':') === false) {
             return (double) $value;
         } else {
-            $found = preg_match_all('/^(?:(?:([0-8]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])|(90):(0?0):(0?0))([NnSs])|(?:(0?[0-9]?[0-9]|1[0-7][0-9]):([0-5]?[0-9]):([0-5]?[0-9])|(180):(0?0):(0?0))([EeWw]))$/', $value, $matches, PREG_SET_ORDER);
+            $found = preg_match_all('/^(?:(?:([0-8]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9](?:\.\d+)?)|(90):(0?0):(0?0))([NnSs])|(?:(0?[0-9]?[0-9]|1[0-7][0-9]):([0-5]?[0-9]):([0-5]?[0-9](?:\.\d+)?)|(180):(0?0):(0?0))([EeWw]))$/', $value, $matches, PREG_SET_ORDER);
 
             if ($found != 1) {
                 throw new InvalidValueException($value . ' is not a valid value.');
