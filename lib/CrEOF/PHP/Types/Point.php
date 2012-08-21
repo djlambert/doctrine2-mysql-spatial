@@ -2,6 +2,8 @@
 
 namespace CrEOF\PHP\Types;
 
+use CrEOF\Exception\InvalidValueException;
+
 /**
  * Point object for MySQL spatial POINT type
  */
@@ -21,7 +23,7 @@ class Point
      * @param mixed $value
      *
      * @return double
-     * @throws \Exception
+     * @throws InvalidValueException
      */
     protected function toDouble($value)
     {
@@ -31,7 +33,7 @@ class Point
             $found = preg_match_all('/^(?:(?:([0-8]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])|(90):(0?0):(0?0))([NnSs])|(?:(0?[0-9]?[0-9]|1[0-7][0-9]):([0-5]?[0-9]):([0-5]?[0-9])|(180):(0?0):(0?0))([EeWw]))$/', $value, $matches, PREG_SET_ORDER);
 
             if ($found != 1) {
-                throw new \Exception();
+                throw new InvalidValueException($value . ' is not a valid value.');
             }
             list( , $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0]));
 
