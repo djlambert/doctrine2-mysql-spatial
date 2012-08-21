@@ -10,12 +10,12 @@ class Point
     /**
      * @var double $latitude
      */
-    private $latitude;
+    protected $latitude;
 
     /**
      * @var double $longitude
      */
-    private $longitude;
+    protected $longitude;
 
     /**
      * @param mixed $latitude
