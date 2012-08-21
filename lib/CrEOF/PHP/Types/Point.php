@@ -70,6 +70,7 @@ class Point
     public function setLatitude($latitude)
     {
         $this->latitude = $this->toDouble($latitude);
+
         return $this;
     }
 
@@ -89,6 +90,7 @@ class Point
     public function setLongitude($longitude)
     {
         $this->longitude = $this->toDouble($longitude);
+
         return $this;
     }
 
