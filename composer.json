@@ -8,6 +8,8 @@
         }
     ],
     "require": {
+        "doctrine/common": "dev-master",
+        "doctrine/dbal": "dev-master",
         "doctrine/orm": "dev-master"
     },
     "autoload": {
