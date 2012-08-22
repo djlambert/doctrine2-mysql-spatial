@@ -65,6 +65,10 @@ class PointTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $point7 = new Point('40:26:46.543N', '79:56:55.832W');
         $this->assertEquals(40.446261944444, $point7->getLatitude());
         $this->assertEquals(-79.948842222222, $point7->getLongitude());
+
+        $point7 = new Point('33:27:0N', '112:4:0W');
+        $this->assertEquals(33.45, $point7->getLatitude());
+        $this->assertEquals(-112.06666666667, $point7->getLongitude());
     }
 
     public function testBadPoint1()
