@@ -1,6 +1,8 @@
 {
     "name": "creof/doctrine2-mysql-spatial",
+    "type": "library",
     "description": "Support for MySQL spatial types and functions",
+    "keywords": ["orm", "database", "mysql", "spatial"],
     "authors": [
         {
             "name": "Derek Lambert",
@@ -8,9 +10,11 @@
         }
     ],
     "require": {
-        "doctrine/common": "dev-master",
-        "doctrine/dbal": "dev-master",
         "doctrine/orm": "dev-master"
+    },
+    "require-dev": {
+        "doctrine/common": "dev-master",
+        "doctrine/dbal": "dev-master"
     },
     "autoload": {
         "psr-0": {
