@@ -27,15 +27,47 @@ class Point
      */
     protected function toDouble($value)
     {
-        if (strpos($value, ':') === false) {
+        $regex = '/
+^                                    # beginning of string
+(?:
+    (?:
+        ([0-8]?[0-9])                # degrees 0-89
+        (?::|°\s*)                   # colon or degree and optional spaces
+        ([0-5]?[0-9])                # minutes 0-59
+        (?::|(?:\'|\xe2\x80\xb2)\s*) # colon or minute or apostrophe and optional spaces
+        ([0-5]?[0-9](?:\.\d+)?)      # seconds 0-59 and optional decimal
+        (?:(?:"|\xe2\x80\xb3)\s*)?   # quote or double prime and optional spaces
+        |
+        (90)(?::|°\s*)(0?0)(?::|(?:\'|\xe2\x80\xb2)\s*)(0?0)(?:(?:"|\xe2\x80\xb3)\s*)?
+    )
+    ([NnSs])                         # N or S for latitude
+    |
+    (?:
+        (0?[0-9]?[0-9]|1[0-7][0-9])  # degrees 0-89
+        (?::|°\s*)                   # colon or degree and optional spaces
+        ([0-5]?[0-9])                # minutes 0-59
+        (?::|(?:\'|\xe2\x80\xb2)\s*) # colon or minute or apostrophe and optional spaces
+        ([0-5]?[0-9](?:\.\d+)?)      # seconds 0-59 and optional decimal
+        (?:(?:"|\xe2\x80\xb3)\s*)?   # quote or double prime and optional spaces
+        |
+        (180)(?::|°\s*)(0?0)(?::|(?:\'|\xe2\x80\xb2)\s*)(0?0)(?:(?:"|\xe2\x80\xb3)\s*)?
+    )
+    ([EeWw])                         # E or W for latitude
+)
+$                                    # end of string
+/x';
+
+        if (is_numeric($value)) {
             return (double) $value;
         } else {
-            $found = preg_match_all('/^(?:(?:([0-8]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9](?:\.\d+)?)|(90):(0?0):(0?0))([NnSs])|(?:(0?[0-9]?[0-9]|1[0-7][0-9]):([0-5]?[0-9]):([0-5]?[0-9](?:\.\d+)?)|(180):(0?0):(0?0))([EeWw]))$/', $value, $matches, PREG_SET_ORDER);
-
-            if ($found != 1) {
-                throw new InvalidValueException($value . ' is not a valid value.');
+            switch (1) {
+                case preg_match_all($regex, $value, $matches, PREG_SET_ORDER):
+                    break;
+                default:
+                    throw new InvalidValueException($value . ' is not a valid value.');
             }
-            list( , $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0]));
+
+            list(, $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0]));
 
             $value = $degrees + ((($minutes * 60) + $seconds) / 3600);
 
