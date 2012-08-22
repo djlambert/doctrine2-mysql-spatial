@@ -67,7 +67,7 @@ $                                    # end of string
                     throw new InvalidValueException($value . ' is not a valid value.');
             }
 
-            list(, $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0]));
+            list(, $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0], function($val) {return $val != '';}));
 
             $value = $degrees + ((($minutes * 60) + $seconds) / 3600);
 
