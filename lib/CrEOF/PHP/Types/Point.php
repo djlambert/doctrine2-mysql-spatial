@@ -120,18 +120,30 @@ $                                    # end of string
                 throw new InvalidValueException($value . ' is not a valid value.');
         }
 
-        list(, $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0], function($val) {return $val != '';}));
+        list(, $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0],
+            function($val) {
+                return $val != '';
+            }
+        ));
 
-        $value = $degrees + ((($minutes * 60) + $seconds) / 3600);
+        return ($degrees + ((($minutes * 60) + $seconds) / 3600)) * (float) $this->getDirectionSign($direction);
+    }
 
+    /**
+     * @param string $direction
+     *
+     * @return int
+     */
+    private function getDirectionSign($direction)
+    {
         switch (strtolower($direction)) {
             case 's':
             case 'w':
-                return (float) ($value * -1);
+                return -1;
                 break;
             case 'n':
             case 'e':
-                return (float) $value;
+                return 1;
                 break;
         }
     }
