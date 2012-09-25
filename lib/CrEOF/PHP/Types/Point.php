@@ -10,22 +10,74 @@ use CrEOF\Exception\InvalidValueException;
 class Point
 {
     /**
-     * @var double $latitude
+     * @var float $latitude
      */
     protected $latitude;
 
     /**
-     * @var double $longitude
+     * @var float $longitude
      */
     protected $longitude;
 
     /**
+     * @param mixed $latitude
+     * @param mixed $longitude
+     */
+    public function __construct($latitude = null, $longitude = null)
+    {
+        if ($latitude && $longitude) {
+            $this->latitude = $this->toFloat($latitude);
+            $this->longitude = $this->toFloat($longitude);
+        }
+    }
+
+    /**
+     * @param mixed $latitude
+     *
+     * @return self
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $this->toFloat($latitude);
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param mixed $longitude
+     *
+     * @return self
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $this->toFloat($longitude);
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
      * @param mixed $value
      *
-     * @return double
+     * @return float
      * @throws InvalidValueException
      */
-    protected function toDouble($value)
+    protected function toFloat($value)
     {
         $regex = '/
 ^                                    # beginning of string
@@ -58,90 +110,29 @@ $                                    # end of string
 /x';
 
         if (is_numeric($value)) {
-            return (double) $value;
-        } else {
-            switch (1) {
-                case preg_match_all($regex, $value, $matches, PREG_SET_ORDER):
-                    break;
-                default:
-                    throw new InvalidValueException($value . ' is not a valid value.');
-            }
-
-            list(, $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0], function($val) {return $val != '';}));
-
-            $value = $degrees + ((($minutes * 60) + $seconds) / 3600);
-
-            switch (strtolower($direction)) {
-                case 's':
-                case 'w':
-                    return (double) ($value * -1);
-                    break;
-                case 'n':
-                case 'e':
-                    return (double) $value;
-                    break;
-            }
+            return (float) $value;
         }
-    }
 
-    /**
-     * @param mixed $latitude
-     * @param mixed $longitude
-     */
-    public function __construct($latitude = null, $longitude = null)
-    {
-        if ($latitude && $longitude) {
-            $this->latitude = $this->toDouble($latitude);
-            $this->longitude = $this->toDouble($longitude);
+        switch (1) {
+            case preg_match_all($regex, $value, $matches, PREG_SET_ORDER):
+                break;
+            default:
+                throw new InvalidValueException($value . ' is not a valid value.');
         }
-    }
 
-    /**
-     * @param mixed $latitude
-     *
-     * @return self
-     */
-    public function setLatitude($latitude)
-    {
-        $this->latitude = $this->toDouble($latitude);
+        list(, $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0], function($val) {return $val != '';}));
 
-        return $this;
-    }
+        $value = $degrees + ((($minutes * 60) + $seconds) / 3600);
 
-    /**
-     * @return double
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
-
-    /**
-     * @param mixed $longitude
-     *
-     * @return self
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $this->toDouble($longitude);
-
-        return $this;
-    }
-
-    /**
-     * @return double
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        //Output from this is used with POINT_STR in DQL so must be in specific format
-        return sprintf('POINT(%f %f)', $this->latitude, $this->longitude);
+        switch (strtolower($direction)) {
+            case 's':
+            case 'w':
+                return (float) ($value * -1);
+                break;
+            case 'n':
+            case 'e':
+                return (float) $value;
+                break;
+        }
     }
 }
