@@ -43,12 +43,11 @@ class PointType extends Type
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        if ($value === null) {
-            return null;
-        }
+        if ($value) {
+            list($longitude, $latitude) = sscanf($value, 'POINT(%f %f)');
 
-        $data = unpack('x/x/x/x/Corder/Ltype/dlatitude/dlongitude', $value);
-        return new Point($data['latitude'], $data['longitude']);
+            return new Point($latitude, $longitude);
+        }
     }
 
     /**
@@ -59,10 +58,38 @@ class PointType extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if ($value === null) {
-            return null;
+        if ($value instanceof Point) {
+            return sprintf('POINT(%s %s)', (string) $value->getLongitude(), (string) $value->getLatitude());
         }
+    }
 
-        return pack('xxxxcLdd', '0', 1, $value->getLatitude(), $value->getLongitude());
+    /**
+     * @return bool
+     */
+    public function canRequireSQLConversion()
+    {
+        return true;
+    }
+
+    /**
+     * @param string           $sqlExpr
+     * @param AbstractPlatform $platform
+     *
+     * @return string
+     */
+    public function convertToPHPValueSQL($sqlExpr, $platform)
+    {
+        return sprintf('AsText(%s)', $sqlExpr);
+    }
+
+    /**
+     * @param string           $sqlExpr
+     * @param AbstractPlatform $platform
+     *
+     * @return string
+     */
+    public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform)
+    {
+        return sprintf('PointFromText(%s)', $sqlExpr);
     }
 }
