@@ -77,7 +77,7 @@ class Point
      * @return float
      * @throws InvalidValueException
      */
-    protected function toFloat($value)
+    private function toFloat($value)
     {
         $regex = '/
 ^                                    # beginning of string
