@@ -79,35 +79,37 @@ class Point
      */
     private function toFloat($value)
     {
-        $regex = '/
-^                                    # beginning of string
-(?:
-    (?:
-        ([0-8]?[0-9])                # degrees 0-89
-        (?::|°\s*)                   # colon or degree and optional spaces
-        ([0-5]?[0-9])                # minutes 0-59
-        (?::|(?:\'|\xe2\x80\xb2)\s*) # colon or minute or apostrophe and optional spaces
-        ([0-5]?[0-9](?:\.\d+)?)      # seconds 0-59 and optional decimal
-        (?:(?:"|\xe2\x80\xb3)\s*)?   # quote or double prime and optional spaces
+        $regex = <<<EOD
+/
+^                                         # beginning of string
+(?|
+    (?|
+        (?<degrees>[0-8]?[0-9])           # degrees 0-89
+        (?::|°\s*)                        # colon or degree and optional spaces
+        (?<minutes>[0-5]?[0-9])           # minutes 0-59
+        (?::|(?:\'|\xe2\x80\xb2)\s*)      # colon or minute or apostrophe and optional spaces
+        (?<seconds>[0-5]?[0-9](?:\.\d+)?) # seconds 0-59 and optional decimal
+        (?:(?:"|\xe2\x80\xb3)\s*)?        # quote or double prime and optional spaces
         |
-        (90)(?::|°\s*)(0?0)(?::|(?:\'|\xe2\x80\xb2)\s*)(0?0)(?:(?:"|\xe2\x80\xb3)\s*)?
+        (?<degrees>90)(?::|°\s*)(?<minutes>0?0)(?::|(?:\'|\xe2\x80\xb2)\s*)(?<seconds>0?0)(?:(?:"|\xe2\x80\xb3)\s*)?
     )
-    ([NnSs])                         # N or S for latitude
+    (?<direction>[NnSs])                  # N or S for latitude
     |
-    (?:
-        (0?[0-9]?[0-9]|1[0-7][0-9])  # degrees 0-89
-        (?::|°\s*)                   # colon or degree and optional spaces
-        ([0-5]?[0-9])                # minutes 0-59
-        (?::|(?:\'|\xe2\x80\xb2)\s*) # colon or minute or apostrophe and optional spaces
-        ([0-5]?[0-9](?:\.\d+)?)      # seconds 0-59 and optional decimal
-        (?:(?:"|\xe2\x80\xb3)\s*)?   # quote or double prime and optional spaces
+    (?|
+        (?<degrees>0?[0-9]?[0-9]|1[0-7][0-9]) # degrees 0-179
+        (?::|°\s*)                            # colon or degree and optional spaces
+        (?<minutes>[0-5]?[0-9])               # minutes 0-59
+        (?::|(?:\'|\xe2\x80\xb2)\s*)          # colon or minute or apostrophe and optional spaces
+        (?<seconds>[0-5]?[0-9](?:\.\d+)?)     # seconds 0-59 and optional decimal
+        (?:(?:"|\xe2\x80\xb3)\s*)?            # quote or double prime and optional spaces
         |
-        (180)(?::|°\s*)(0?0)(?::|(?:\'|\xe2\x80\xb2)\s*)(0?0)(?:(?:"|\xe2\x80\xb3)\s*)?
+        (?<degrees>180)(?::|°\s*)(?<minutes>0?0)(?::|(?:\'|\xe2\x80\xb2)\s*)(?<seconds>0?0)(?:(?:"|\xe2\x80\xb3)\s*)?
     )
-    ([EeWw])                         # E or W for latitude
+    (?<direction>[EeWw])                      # E or W for latitude
 )
-$                                    # end of string
-/x';
+$                                             # end of string
+/x
+EOD;
 
         if (is_numeric($value)) {
             return (float) $value;
@@ -120,13 +122,9 @@ $                                    # end of string
                 throw new InvalidValueException($value . ' is not a valid value.');
         }
 
-        list(, $degrees, $minutes, $seconds, $direction) = array_values(array_filter($matches[0],
-            function($val) {
-                return $val != '';
-            }
-        ));
+        $p = $matches[0];
 
-        return ($degrees + ((($minutes * 60) + $seconds) / 3600)) * (float) $this->getDirectionSign($direction);
+        return ($p['degrees'] + ((($p['minutes'] * 60) + $p['seconds']) / 3600)) * (float) $this->getDirectionSign($p['direction']);
     }
 
     /**
