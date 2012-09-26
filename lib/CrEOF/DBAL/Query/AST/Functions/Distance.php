@@ -11,8 +11,15 @@ use Doctrine\ORM\Query\Lexer;
  */
 class DistanceFunction extends FunctionNode
 {
-    public $firstArithmeticPrimary;
-    public $secondArithmeticPrimary;
+    /**
+     * @var \Doctrine\ORM\Query\AST\Node
+     */
+    public $firstPointExpression;
+
+    /**
+     * @var \Doctrine\ORM\Query\AST\Node
+     */
+    public $secondPointExpression;
 
     /**
      * @inheritdoc
@@ -20,9 +27,9 @@ class DistanceFunction extends FunctionNode
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
         return 'GLength(LineString(' .
-            $this->firstArithmeticPrimary->dispatch($sqlWalker) .
+            $this->firstPointExpression->dispatch($sqlWalker) .
             ', ' .
-            $this->secondArithmeticPrimary->dispatch($sqlWalker) .
+            $this->secondPointExpression->dispatch($sqlWalker) .
             '))';
     }
 
@@ -34,11 +41,11 @@ class DistanceFunction extends FunctionNode
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
 
-        $this->firstArithmeticPrimary = $parser->ArithmeticPrimary();
+        $this->firstPointExpression = $parser->ArithmeticPrimary();
 
         $parser->match(Lexer::T_COMMA);
 
-        $this->secondArithmeticPrimary = $parser->ArithmeticPrimary();
+        $this->secondPointExpression = $parser->ArithmeticPrimary();
 
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
