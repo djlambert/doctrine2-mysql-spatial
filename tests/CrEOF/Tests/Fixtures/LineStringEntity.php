@@ -3,15 +3,15 @@
 namespace CrEOF\Tests\Fixtures;
 
 use Doctrine\ORM\Query;
-use CrEOF\PHP\Types\Point;
+use CrEOF\PHP\Types\LineString;
 
 /**
- * Position entity
+ * LineString entity
  *
  * @Entity
  * @Table(options={"engine"="MyISAM"})
  */
-class PositionEntity
+class LineStringEntity
 {
     /**
      * @var int $id
@@ -23,11 +23,11 @@ class PositionEntity
     protected $id;
 
     /**
-     * @var Point $point
+     * @var LineString $lineString
      *
-     * @Column(type="point", nullable=true)
+     * @Column(type="linestring", nullable=true)
      */
-    protected $point;
+    protected $lineString;
 
     /**
      * Get id
@@ -40,26 +40,26 @@ class PositionEntity
     }
 
     /**
-     * Set point
+     * Set lineString
      *
-     * @param Point $point
+     * @param LineString $lineString
      *
      * @return self
      */
-    public function setPoint(Point $point)
+    public function setLineString(LineString $lineString)
     {
-        $this->point = $point;
+        $this->lineString = $lineString;
 
         return $this;
     }
 
     /**
-     * Get point
+     * Get lineString
      *
-     * @return Point
+     * @return LineString
      */
-    public function getPoint()
+    public function getLineString()
     {
-        return $this->point;
+        return $this->lineString;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace CrEOF\DBAL\Query\AST\Functions;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
@@ -9,7 +10,7 @@ use Doctrine\ORM\Query\Lexer;
  *
  * Example: DISTANCE(foo.point, POINT_STR(:param))
  */
-class DistanceFunction extends FunctionNode
+class GLength extends FunctionNode
 {
     /**
      * @var \Doctrine\ORM\Query\AST\Node

@@ -3,15 +3,15 @@
 namespace CrEOF\Tests\Fixtures;
 
 use Doctrine\ORM\Query;
-use CrEOF\PHP\Types\Point;
+use CrEOF\PHP\Types\Geometry;
 
 /**
- * Position entity
+ * Geometry entity
  *
  * @Entity
  * @Table(options={"engine"="MyISAM"})
  */
-class PositionEntity
+class GeometryEntity
 {
     /**
      * @var int $id
@@ -23,11 +23,11 @@ class PositionEntity
     protected $id;
 
     /**
-     * @var Point $point
+     * @var Geometry $geometry
      *
-     * @Column(type="point", nullable=true)
+     * @Column(type="geometry", nullable=true)
      */
-    protected $point;
+    protected $geometry;
 
     /**
      * Get id
@@ -40,26 +40,26 @@ class PositionEntity
     }
 
     /**
-     * Set point
+     * Set geometry
      *
-     * @param Point $point
+     * @param Geometry $geometry
      *
      * @return self
      */
-    public function setPoint(Point $point)
+    public function setGeometry(Geometry $geometry)
     {
-        $this->point = $point;
+        $this->geometry = $geometry;
 
         return $this;
     }
 
     /**
-     * Get point
+     * Get geometry
      *
-     * @return Point
+     * @return Geometry
      */
-    public function getPoint()
+    public function getGeometry()
     {
-        return $this->point;
+        return $this->geometry;
     }
 }

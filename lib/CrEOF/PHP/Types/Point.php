@@ -7,7 +7,7 @@ use CrEOF\Exception\InvalidValueException;
 /**
  * Point object for MySQL spatial POINT type
  */
-class Point
+class Point extends Geometry
 {
     /**
      * @var float $latitude
@@ -23,12 +23,26 @@ class Point
      * @param mixed $latitude
      * @param mixed $longitude
      */
-    public function __construct($latitude = null, $longitude = null)
+    public function __construct($latitude, $longitude)
     {
-        if ($latitude && $longitude) {
-            $this->latitude = $this->toFloat($latitude);
-            $this->longitude = $this->toFloat($longitude);
-        }
+        $this->latitude = $this->toFloat($latitude);
+        $this->longitude = $this->toFloat($longitude);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('POINT(%s %s)', $this->latitude, $this->longitude);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCoordinates()
+    {
+        return sprintf('%s %s', $this->latitude, $this->longitude);
     }
 
     /**
