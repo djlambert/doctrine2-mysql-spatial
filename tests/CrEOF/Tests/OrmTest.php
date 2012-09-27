@@ -35,6 +35,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->getConfiguration()->addCustomNumericFunction('glength', 'CrEOF\DBAL\Query\AST\Functions\GLength');
         $this->_em->getConfiguration()->addCustomNumericFunction('x', 'CrEOF\DBAL\Query\AST\Functions\X');
         $this->_em->getConfiguration()->addCustomNumericFunction('y', 'CrEOF\DBAL\Query\AST\Functions\Y');
+        $this->_em->getConfiguration()->addCustomNumericFunction('numpoints', 'CrEOF\DBAL\Query\AST\Functions\NumPoints');
         $this->_em->getConfiguration()->addCustomStringFunction('geomfromtext', 'CrEOF\DBAL\Query\AST\Functions\GeomFromText');
         $this->_em->getConfiguration()->addCustomStringFunction('geometrytype', 'CrEOF\DBAL\Query\AST\Functions\GeometryType');
     }
