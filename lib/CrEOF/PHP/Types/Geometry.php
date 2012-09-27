@@ -43,11 +43,11 @@ abstract class Geometry
         return self::ARRAY_VALUES;
     }
 
-    protected function getPointArrayString()
+    protected function getPointArrayString(array $points)
     {
         $string = null;
 
-        foreach ($this->points as $point) {
+        foreach ($points as $point) {
             $string .= ($string ? ', ': null) . $point->getCoordinates();
         }
 

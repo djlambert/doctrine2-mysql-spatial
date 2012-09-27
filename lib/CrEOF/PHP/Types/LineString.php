@@ -59,6 +59,6 @@ class LineString extends Geometry
      */
     public function __toString()
     {
-        return 'LINESTRING(' . $this->getPointArrayString() . ')';
+        return 'LINESTRING(' . $this->getPointArrayString($this->points) . ')';
     }
 }
