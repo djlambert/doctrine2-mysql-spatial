@@ -34,6 +34,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
 
         $this->_em->getConfiguration()->addCustomNumericFunction('glength', 'CrEOF\DBAL\Query\AST\Functions\GLength');
         $this->_em->getConfiguration()->addCustomStringFunction('geomfromtext', 'CrEOF\DBAL\Query\AST\Functions\GeomFromText');
+        $this->_em->getConfiguration()->addCustomStringFunction('geometrytype', 'CrEOF\DBAL\Query\AST\Functions\GeometryType');
     }
 
     protected function tearDown()
