@@ -22,12 +22,7 @@ class LineString extends Geometry
      */
     public function __construct(array $points)
     {
-        foreach ($points as $point) {
-            if (!($point instanceof Point)) {
-                throw InvalidValueException::valueNotPoint();
-            }
-            $this->addPoint($point);
-        }
+        $this->setPoints($points);
     }
 
     /**
@@ -48,6 +43,20 @@ class LineString extends Geometry
     public function getPoints()
     {
         return $this->points;
+    }
+
+    /**
+     * @param array $points
+     *
+     * @return self
+     */
+    public function setPoints(array $points)
+    {
+        $this->validatePointArray($points);
+
+        $this->points = $points;
+
+        return $this;
     }
 
     /**
