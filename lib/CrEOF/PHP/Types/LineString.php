@@ -24,7 +24,7 @@ class LineString extends Geometry
     {
         foreach ($points as $point) {
             if (!($point instanceof Point)) {
-                throw new InvalidValueException('Value not of type "Point"');
+                throw InvalidValueException::valueNotPoint();
             }
             $this->addPoint($point);
         }
