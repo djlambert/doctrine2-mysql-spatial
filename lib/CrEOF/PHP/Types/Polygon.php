@@ -17,8 +17,6 @@ class Polygon extends Geometry
 
     /**
      * @param array $polygons
-     *
-     * @throws InvalidValueException
      */
     public function __construct(array $polygons)
     {
@@ -29,7 +27,6 @@ class Polygon extends Geometry
      * @param array $polygon
      *
      * @return self
-     * @throws InvalidValueException
      */
     public function addPolygon(array $polygon)
     {
@@ -50,10 +47,13 @@ class Polygon extends Geometry
      * @param array $polygons
      *
      * @return self
+     * @throws InvalidValueException
      */
     public function setPolygons(array $polygons)
     {
-        $this->validatePolygonArray($polygons);
+        if (!$this->isValidPolygonArray($polygons)) {
+            throw InvalidValueException::valueNotArray();
+        }
 
         $this->polygons = $polygons;
 
@@ -79,16 +79,15 @@ class Polygon extends Geometry
         return $string;
     }
 
-    private function validatePolygonArray(array $array)
+    private function isValidPolygonArray(array $array)
     {
         foreach ($array as $value) {
-            switch (gettype($value)) {
-                case 'array':
-                    $this->validatePointArray($value);
-                    break;
-                default:
-                    throw InvalidValueException::valueNotArray();
-                    break;
+            if (!is_array($value)) {
+                return false;
+            }
+
+            if (!$this->isValidPointArray($value)) {
+                return false;
             }
         }
 

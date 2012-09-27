@@ -9,19 +9,21 @@ use CrEOF\Exception\InvalidValueException;
  */
 abstract class Geometry
 {
-    protected function validatePoint($point)
+    protected function isValidPoint($point)
     {
         if (!($point instanceof Point)) {
-            throw InvalidValueException::valueNotPoint();
+            return false;
         }
 
         return true;
     }
 
-    protected function validatePointArray(array $array)
+    protected function isValidPointArray(array $array)
     {
         foreach ($array as $point) {
-            $this->validatePoint($point);
+            if (!$this->isValidPoint($point)) {
+                return false;
+            };
         }
 
         return true;

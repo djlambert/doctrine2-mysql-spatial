@@ -17,8 +17,6 @@ class LineString extends Geometry
 
     /**
      * @param array $points
-     *
-     * @throws InvalidValueException
      */
     public function __construct(array $points)
     {
@@ -49,10 +47,13 @@ class LineString extends Geometry
      * @param array $points
      *
      * @return self
+     * @throws InvalidValueException
      */
     public function setPoints(array $points)
     {
-        $this->validatePointArray($points);
+        if (!$this->isValidPointArray($points)) {
+            throw InvalidValueException::valueNotPoint();
+        }
 
         $this->points = $points;
 
