@@ -11,6 +11,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
     const GEOMETRY_ENTITY   = 'CrEOF\Tests\Fixtures\GeometryEntity';
     const POINT_ENTITY      = 'CrEOF\Tests\Fixtures\PointEntity';
     const LINESTRING_ENTITY = 'CrEOF\Tests\Fixtures\LineStringEntity';
+    const POLYGON_ENTITY    = 'CrEOF\Tests\Fixtures\PolygonEntity';
 
     protected function setUp() {
         parent::setUp();
@@ -26,6 +27,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
                      $this->_em->getClassMetadata(self::GEOMETRY_ENTITY),
                      $this->_em->getClassMetadata(self::POINT_ENTITY),
                      $this->_em->getClassMetadata(self::LINESTRING_ENTITY),
+                     $this->_em->getClassMetadata(self::POLYGON_ENTITY)
                 ));
             static::$_setup = true;
         }
@@ -45,6 +47,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $conn->executeUpdate('DELETE FROM GeometryEntity');
         $conn->executeUpdate('DELETE FROM PointEntity');
         $conn->executeUpdate('DELETE FROM LineStringEntity');
+        $conn->executeUpdate('DELETE FROM PolygonEntity');
 
         $this->_em->clear();
     }
