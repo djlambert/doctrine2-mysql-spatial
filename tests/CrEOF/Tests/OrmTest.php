@@ -19,6 +19,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
             \Doctrine\DBAL\Types\Type::addType('geometry', '\CrEOF\DBAL\Types\GeometryType');
             \Doctrine\DBAL\Types\Type::addType('point', '\CrEOF\DBAL\Types\PointType');
             \Doctrine\DBAL\Types\Type::addType('linestring', '\CrEOF\DBAL\Types\LineStringType');
+            \Doctrine\DBAL\Types\Type::addType('polygon', '\CrEOF\DBAL\Types\PolygonType');
 
             $this->_schemaTool->createSchema(
                 array(

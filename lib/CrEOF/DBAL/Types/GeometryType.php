@@ -15,6 +15,7 @@ class GeometryType extends Type
     const GEOMETRY    = 'geometry';
     const POINT       = 'point';
     const LINESTRING  = 'linestring';
+    const POLYGON     = 'polygon';
 
     /**
      * Gets the name of this type.
