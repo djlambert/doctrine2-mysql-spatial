@@ -6,9 +6,7 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * Distance DQL function for calculating distances between two points
- *
- * Example: DISTANCE(foo.point, POINT_STR(:param))
+ * GLength DQL function for calculating distances between two points
  */
 class GLength extends FunctionNode
 {
