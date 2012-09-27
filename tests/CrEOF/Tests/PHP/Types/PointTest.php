@@ -99,4 +99,12 @@ class PointTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('CrEOF\Exception\InvalidValueException');
         $point = new Point('84:26:46N', '108:53:94W');
     }
+
+    public function testToString()
+    {
+        $point  = new Point(42.6525793, -73.7562317);
+        $result = (string) $point;
+
+        $this->assertEquals('POINT(42.6525793 -73.7562317)', $result);
+    }
 }

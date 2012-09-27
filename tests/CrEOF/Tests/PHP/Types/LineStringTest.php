@@ -35,4 +35,18 @@ class LineStringTest extends \PHPUnit_Framework_TestCase
 
         $lineString = new LineString(array(1, 2, 3 ,4));
     }
+
+    public function testToString()
+    {
+        $points     = array(
+            new Point(0, 0),
+            new Point(10, 0),
+            new Point(10, 10),
+            new Point(0, 10)
+        );
+        $lineString = new LineString($points);
+        $result = (string) $lineString;
+
+        $this->assertEquals('LINESTRING(0 0, 10 0, 10 10, 0 10)', $result);
+    }
 }
