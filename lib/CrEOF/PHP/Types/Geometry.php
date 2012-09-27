@@ -42,4 +42,15 @@ abstract class Geometry
 
         return self::ARRAY_VALUE;
     }
+
+    protected function getPointArrayString()
+    {
+        $string = null;
+
+        foreach ($this->points as $point) {
+            $string .= ($string ? ', ': null) . $point->getCoordinates();
+        }
+
+        return $string;
+    }
 }

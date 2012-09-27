@@ -59,12 +59,6 @@ class LineString extends Geometry
      */
     public function __toString()
     {
-        $points = null;
-
-        foreach ($this->points as $point) {
-            $points .= ($points ? ', ': null) . $point->getCoordinates();
-        }
-
-        return "LINESTRING($points)";
+        return 'LINESTRING(' . $this->getPointArrayString() . ')';
     }
 }
