@@ -14,7 +14,7 @@ class GeometryType extends Type
 {
     const GEOMETRY    = 'geometry';
     const POINT       = 'point';
-    const LINE_STRING = 'linestring';
+    const LINESTRING  = 'linestring';
 
     /**
      * Gets the name of this type.
