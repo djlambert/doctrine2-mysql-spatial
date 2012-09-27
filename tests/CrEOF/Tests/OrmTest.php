@@ -9,7 +9,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
     protected static $_setup = false;
 
     const GEOMETRY_ENTITY    = 'CrEOF\Tests\Fixtures\GeometryEntity';
-    const POSITION_ENTITY    = 'CrEOF\Tests\Fixtures\PositionEntity';
+    const POSITION_ENTITY    = 'CrEOF\Tests\Fixtures\PointEntity';
     const LINESTRING_ENTITY = 'CrEOF\Tests\Fixtures\LineStringEntity';
 
     protected function setUp() {
@@ -42,7 +42,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_sqlLoggerStack->enabled = false;
 
         $conn->executeUpdate('DELETE FROM GeometryEntity');
-        $conn->executeUpdate('DELETE FROM PositionEntity');
+        $conn->executeUpdate('DELETE FROM PointEntity');
         $conn->executeUpdate('DELETE FROM LineStringEntity');
 
         $this->_em->clear();

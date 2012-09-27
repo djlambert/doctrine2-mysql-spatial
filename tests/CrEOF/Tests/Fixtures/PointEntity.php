@@ -11,7 +11,7 @@ use CrEOF\PHP\Types\Point;
  * @Entity
  * @Table(options={"engine"="MyISAM"})
  */
-class PositionEntity
+class PointEntity
 {
     /**
      * @var int $id
