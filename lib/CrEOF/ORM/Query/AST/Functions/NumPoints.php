@@ -1,14 +1,14 @@
 <?php
 
-namespace CrEOF\DBAL\Query\AST\Functions;
+namespace CrEOF\ORM\Query\AST\Functions;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * GeometryType DQL function for querying using spatial objects as parameters
+ * NumPoints DQL function for querying using spatial objects as parameters
  */
-class GeometryType extends FunctionNode
+class NumPoints extends FunctionNode
 {
     /**
      * @var \Doctrine\ORM\Query\AST\Node
@@ -20,7 +20,7 @@ class GeometryType extends FunctionNode
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        return 'GeometryType(' . $this->geomExpression->dispatch($sqlWalker) . ')';
+        return 'NumPoints(' . $this->geomExpression->dispatch($sqlWalker) . ')';
     }
 
     /**

@@ -1,14 +1,14 @@
 <?php
 
-namespace CrEOF\DBAL\Query\AST\Functions;
+namespace CrEOF\ORM\Query\AST\Functions;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * NumInteriorRings DQL function for querying using spatial objects as parameters
+ * GeometryType DQL function for querying using spatial objects as parameters
  */
-class NumInteriorRings extends FunctionNode
+class GeometryType extends FunctionNode
 {
     /**
      * @var \Doctrine\ORM\Query\AST\Node
@@ -20,7 +20,7 @@ class NumInteriorRings extends FunctionNode
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        return 'NumInteriorRings(' . $this->geomExpression->dispatch($sqlWalker) . ')';
+        return 'GeometryType(' . $this->geomExpression->dispatch($sqlWalker) . ')';
     }
 
     /**

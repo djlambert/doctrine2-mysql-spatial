@@ -1,6 +1,6 @@
 <?php
 
-namespace CrEOF\Tests\DBAL\Types;
+namespace CrEOF\Tests\ORM\Types;
 
 use Doctrine\ORM\Query;
 use CrEOF\PHP\Types\Point;
@@ -9,11 +9,11 @@ use CrEOF\Tests\OrmTest;
 use CrEOF\Tests\Fixtures\PolygonEntity;
 
 /**
- * Test Area DQL function
+ * Test NumInteriorRings DQL function
  */
-class AreaTest extends OrmTest
+class NumInteriorRingsTest extends OrmTest
 {
-    public function testArea()
+    public function testNumInteriorRings()
     {
         $entity1 = new PolygonEntity();
         $points = array(
@@ -68,11 +68,25 @@ class AreaTest extends OrmTest
         $entity4 = new PolygonEntity();
         $points = array(
             array(
+                new Point(0, 0),
+                new Point(10, 0),
+                new Point(10, 10),
+                new Point(0, 10),
+                new Point(0, 0)
+            ),
+            array(
                 new Point(5, 5),
                 new Point(7, 5),
                 new Point(7, 7),
                 new Point(5, 7),
                 new Point(5, 5)
+            ),
+            array(
+                new Point(2, 2),
+                new Point(4, 2),
+                new Point(4, 4),
+                new Point(2, 4),
+                new Point(2, 2)
             )
         );
 
@@ -81,19 +95,19 @@ class AreaTest extends OrmTest
         $this->_em->flush();
         $this->_em->clear();
 
-        $query  = $this->_em->createQuery('SELECT Area(p.polygon) FROM CrEOF\Tests\Fixtures\PolygonEntity p');
+        $query  = $this->_em->createQuery('SELECT NumInteriorRings(p.polygon) FROM CrEOF\Tests\Fixtures\PolygonEntity p');
         $result = $query->getResult();
 
-        $this->assertEquals(100, $result[0][1]);
-        $this->assertEquals(96, $result[1][1]);
-        $this->assertEquals(100, $result[2][1]);
-        $this->assertEquals(4, $result[3][1]);
+        $this->assertEquals(0, $result[0][1]);
+        $this->assertEquals(1, $result[1][1]);
+        $this->assertEquals(0, $result[2][1]);
+        $this->assertEquals(2, $result[3][1]);
         $this->_em->clear();
 
-        $query  = $this->_em->createQuery('SELECT p FROM CrEOF\Tests\Fixtures\PolygonEntity p WHERE Area(p.polygon) < 50');
+        $query  = $this->_em->createQuery('SELECT p FROM CrEOF\Tests\Fixtures\PolygonEntity p WHERE NumInteriorRings(p.polygon) = 1');
         $result = $query->getResult();
 
         $this->assertCount(1, $result);
-        $this->assertEquals($entity4, $result[0]);
+        $this->assertEquals($entity2, $result[0]);
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace CrEOF\DBAL\Query\AST\Functions;
+namespace CrEOF\ORM\Query\AST\Functions;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * Area DQL function for querying using spatial objects as parameters
+ * NumInteriorRings DQL function for querying using spatial objects as parameters
  */
-class Area extends FunctionNode
+class NumInteriorRings extends FunctionNode
 {
     /**
      * @var \Doctrine\ORM\Query\AST\Node
@@ -20,7 +20,7 @@ class Area extends FunctionNode
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        return 'Area(' . $this->geomExpression->dispatch($sqlWalker) . ')';
+        return 'NumInteriorRings(' . $this->geomExpression->dispatch($sqlWalker) . ')';
     }
 
     /**

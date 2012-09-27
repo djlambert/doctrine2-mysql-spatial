@@ -1,15 +1,15 @@
 <?php
 
-namespace CrEOF\Tests\DBAL\Functions;
+namespace CrEOF\Tests\ORM\Functions;
 
 use Doctrine\ORM\Query;
 use CrEOF\PHP\Types\Point;
 use CrEOF\Tests\Fixtures\PointEntity;
 use CrEOF\Tests\OrmTest;
 
-class GLengthTest extends OrmTest
+class YTest extends OrmTest
 {
-    public function testPointGLength()
+    public function testY()
     {
         $entity1 = new PointEntity();
 
@@ -27,15 +27,20 @@ class GLengthTest extends OrmTest
         $this->_em->persist($entity3);
 
         $this->_em->flush();
+
         $this->_em->clear();
 
-        $query = $this->_em->createQuery('SELECT p FROM CrEOF\Tests\Fixtures\PointEntity p WHERE GLength(p.point, GeomFromText(:point)) > 10');
-
-        $query->setParameter('point', new Point(10, 10));
-
+        $query  = $this->_em->createQuery('SELECT Y(p.point) FROM CrEOF\Tests\Fixtures\PointEntity p');
         $result = $query->getResult();
 
-        $this->assertCount(1, $result);
-        $this->assertEquals($entity1, $result[0]);
+        $this->assertEquals(0, $result[0][1]);
+        $this->assertEquals(5, $result[1][1]);
+        $this->assertEquals(10, $result[2][1]);
+        $this->_em->clear();
+
+        $query = $this->_em->createQuery('SELECT p FROM CrEOF\Tests\Fixtures\PointEntity p WHERE Y(p.point) = 5');
+        $result = $query->getResult();
+
+        $this->assertEquals($entity2, $result[0]);
     }
 }

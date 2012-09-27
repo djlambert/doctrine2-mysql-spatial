@@ -1,6 +1,6 @@
 <?php
 
-namespace CrEOF\Tests\DBAL\Types;
+namespace CrEOF\Tests\ORM\Types;
 
 use Doctrine\ORM\Query;
 use CrEOF\PHP\Types\LineString;

@@ -1,14 +1,14 @@
 <?php
 
-namespace CrEOF\DBAL\Query\AST\Functions;
+namespace CrEOF\ORM\Query\AST\Functions;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * X DQL function for querying using spatial objects as parameters
+ * Y DQL function for querying using spatial objects as parameters
  */
-class X extends FunctionNode
+class Y extends FunctionNode
 {
     /**
      * @var \Doctrine\ORM\Query\AST\Node
@@ -20,7 +20,7 @@ class X extends FunctionNode
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        return 'X(' . $this->geomExpression->dispatch($sqlWalker) . ')';
+        return 'Y(' . $this->geomExpression->dispatch($sqlWalker) . ')';
     }
 
     /**

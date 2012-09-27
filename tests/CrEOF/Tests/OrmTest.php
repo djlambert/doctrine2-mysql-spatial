@@ -32,14 +32,14 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
             static::$_setup = true;
         }
 
-        $this->_em->getConfiguration()->addCustomNumericFunction('glength', 'CrEOF\DBAL\Query\AST\Functions\GLength');
-        $this->_em->getConfiguration()->addCustomNumericFunction('x', 'CrEOF\DBAL\Query\AST\Functions\X');
-        $this->_em->getConfiguration()->addCustomNumericFunction('y', 'CrEOF\DBAL\Query\AST\Functions\Y');
-        $this->_em->getConfiguration()->addCustomNumericFunction('numpoints', 'CrEOF\DBAL\Query\AST\Functions\NumPoints');
-        $this->_em->getConfiguration()->addCustomNumericFunction('area', 'CrEOF\DBAL\Query\AST\Functions\Area');
-        $this->_em->getConfiguration()->addCustomNumericFunction('numinteriorrings', 'CrEOF\DBAL\Query\AST\Functions\NumInteriorRings');
-        $this->_em->getConfiguration()->addCustomStringFunction('geomfromtext', 'CrEOF\DBAL\Query\AST\Functions\GeomFromText');
-        $this->_em->getConfiguration()->addCustomStringFunction('geometrytype', 'CrEOF\DBAL\Query\AST\Functions\GeometryType');
+        $this->_em->getConfiguration()->addCustomNumericFunction('glength', 'CrEOF\ORM\Query\AST\Functions\GLength');
+        $this->_em->getConfiguration()->addCustomNumericFunction('x', 'CrEOF\ORM\Query\AST\Functions\X');
+        $this->_em->getConfiguration()->addCustomNumericFunction('y', 'CrEOF\ORM\Query\AST\Functions\Y');
+        $this->_em->getConfiguration()->addCustomNumericFunction('numpoints', 'CrEOF\ORM\Query\AST\Functions\NumPoints');
+        $this->_em->getConfiguration()->addCustomNumericFunction('area', 'CrEOF\ORM\Query\AST\Functions\Area');
+        $this->_em->getConfiguration()->addCustomNumericFunction('numinteriorrings', 'CrEOF\ORM\Query\AST\Functions\NumInteriorRings');
+        $this->_em->getConfiguration()->addCustomStringFunction('geomfromtext', 'CrEOF\ORM\Query\AST\Functions\GeomFromText');
+        $this->_em->getConfiguration()->addCustomStringFunction('geometrytype', 'CrEOF\ORM\Query\AST\Functions\GeometryType');
     }
 
     protected function tearDown()

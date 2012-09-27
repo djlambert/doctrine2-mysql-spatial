@@ -1,6 +1,6 @@
 <?php
 
-namespace CrEOF\Tests\DBAL\Functions;
+namespace CrEOF\Tests\ORM\Functions;
 
 use Doctrine\ORM\Query;
 use CrEOF\PHP\Types\Point;
