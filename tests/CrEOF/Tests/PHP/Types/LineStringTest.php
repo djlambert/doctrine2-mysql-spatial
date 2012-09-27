@@ -45,7 +45,7 @@ class LineStringTest extends \PHPUnit_Framework_TestCase
             new Point(0, 10)
         );
         $lineString = new LineString($points);
-        $result = (string) $lineString;
+        $result     = (string) $lineString;
 
         $this->assertEquals('LINESTRING(0 0, 10 0, 10 10, 0 10)', $result);
     }
