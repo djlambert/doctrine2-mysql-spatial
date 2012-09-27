@@ -6,7 +6,7 @@ Add MySQL spatial extension support to Doctrine2.
 * Geometry
 * Point
 * LineString
-* Polygon (in progress)
+* Polygon
 * MultiPoint (todo)
 * MultiLineString (todo)
 * MultiPolygon (todo)
