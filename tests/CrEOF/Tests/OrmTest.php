@@ -8,8 +8,8 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
 {
     protected static $_setup = false;
 
-    const GEOMETRY_ENTITY    = 'CrEOF\Tests\Fixtures\GeometryEntity';
-    const POSITION_ENTITY    = 'CrEOF\Tests\Fixtures\PointEntity';
+    const GEOMETRY_ENTITY   = 'CrEOF\Tests\Fixtures\GeometryEntity';
+    const POINT_ENTITY      = 'CrEOF\Tests\Fixtures\PointEntity';
     const LINESTRING_ENTITY = 'CrEOF\Tests\Fixtures\LineStringEntity';
 
     protected function setUp() {
@@ -23,7 +23,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
             $this->_schemaTool->createSchema(
                 array(
                      $this->_em->getClassMetadata(self::GEOMETRY_ENTITY),
-                     $this->_em->getClassMetadata(self::POSITION_ENTITY),
+                     $this->_em->getClassMetadata(self::POINT_ENTITY),
                      $this->_em->getClassMetadata(self::LINESTRING_ENTITY),
                 ));
             static::$_setup = true;
