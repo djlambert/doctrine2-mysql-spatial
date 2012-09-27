@@ -2,7 +2,6 @@
 
 namespace CrEOF\Tests\Fixtures;
 
-use Doctrine\ORM\Query;
 use CrEOF\PHP\Types\Point;
 
 /**
