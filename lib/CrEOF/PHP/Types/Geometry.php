@@ -9,8 +9,8 @@ use CrEOF\Exception\InvalidValueException;
  */
 abstract class Geometry
 {
-    const ARRAY_VALUE = 1;
-    const POINT_VALUE = 2;
+    const ARRAY_VALUES = 1;
+    const POINT_VALUES = 2;
 
     /**
      * @var array $points
@@ -19,7 +19,7 @@ abstract class Geometry
 
     protected function validatePoint($point, $type = null)
     {
-        if ($type && $type != self::POINT_VALUE) {
+        if ($type && $type != self::POINT_VALUES) {
             throw InvalidValueException::mixedValues();
         }
 
@@ -27,12 +27,12 @@ abstract class Geometry
             throw InvalidValueException::valueNotPoint();
         }
 
-        return self::POINT_VALUE;
+        return self::POINT_VALUES;
     }
 
     protected function validatePointArray(array $array, $type = null)
     {
-        if ($type && $type != self::ARRAY_VALUE) {
+        if ($type && $type != self::ARRAY_VALUES) {
             throw InvalidValueException::mixedValues();
         }
 
@@ -40,7 +40,7 @@ abstract class Geometry
             $this->validatePoint($point);
         }
 
-        return self::ARRAY_VALUE;
+        return self::ARRAY_VALUES;
     }
 
     protected function getPointArrayString()
