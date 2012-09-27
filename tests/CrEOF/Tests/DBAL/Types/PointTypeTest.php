@@ -22,7 +22,7 @@ class PointTypeTest extends OrmTest
 
         $this->_em->clear();
 
-        $queryEntity = $this->_em->getRepository(self::POSITION_ENTITY)->find($id);
+        $queryEntity = $this->_em->getRepository(self::POINT_ENTITY)->find($id);
         $this->assertEquals($entity, $queryEntity);
     }
 
@@ -37,7 +37,7 @@ class PointTypeTest extends OrmTest
 
         $this->_em->clear();
 
-        $queryEntity = $this->_em->getRepository(self::POSITION_ENTITY)->find($id);
+        $queryEntity = $this->_em->getRepository(self::POINT_ENTITY)->find($id);
         $this->assertEquals($entity, $queryEntity);
     }
 }
