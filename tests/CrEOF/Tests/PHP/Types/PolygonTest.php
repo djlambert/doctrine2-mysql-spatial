@@ -12,22 +12,24 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
     {
         $lineString = new Polygon(array());
 
-        $this->assertEmpty($lineString->getPoints());
+        $this->assertEmpty($lineString->getPolygons());
     }
 
     public function testGoodSolidPolygon()
     {
         $points = array(
-            new Point(0, 0),
-            new Point(10, 0),
-            new Point(10, 10),
-            new Point(0, 10),
-            new Point(0, 0)
+            array(
+                new Point(0, 0),
+                new Point(10, 0),
+                new Point(10, 10),
+                new Point(0, 10),
+                new Point(0, 0)
+            )
         );
 
         $polygon = new Polygon($points);
 
-        $this->assertEquals($points, $polygon->getPoints());
+        $this->assertEquals($points, $polygon->getPolygons());
     }
 
     public function testGoodPolygonRing()
@@ -51,7 +53,7 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
 
         $polygon = new Polygon($points);
 
-        $this->assertEquals($points, $polygon->getPoints());
+        $this->assertEquals($points, $polygon->getPolygons());
     }
 
     public function testBadPolygon()

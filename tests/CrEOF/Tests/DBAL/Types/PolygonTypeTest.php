@@ -28,7 +28,32 @@ class PolygonTypeTest extends OrmTest
         $this->assertEquals($entity, $queryEntity);
     }
 
-    public function testPolygon()
+    public function testSolidPolygon()
+    {
+        $entity = new PolygonEntity();
+        $points = array(
+            array(
+                new Point(0, 0),
+                new Point(10, 0),
+                new Point(10, 10),
+                new Point(0, 10),
+                new Point(0, 0)
+            )
+        );
+
+        $entity->setPolygon(new Polygon($points));
+        $this->_em->persist($entity);
+        $this->_em->flush();
+
+        $id = $entity->getId();
+
+        $this->_em->clear();
+
+        $queryEntity = $this->_em->getRepository(self::POLYGON_ENTITY)->find($id);
+        $this->assertEquals($entity, $queryEntity);
+    }
+
+    public function testPolygonRing()
     {
         $entity = new PolygonEntity();
         $points = array(
@@ -49,7 +74,6 @@ class PolygonTypeTest extends OrmTest
         );
 
         $entity->setPolygon(new Polygon($points));
-
         $this->_em->persist($entity);
         $this->_em->flush();
 
@@ -65,10 +89,12 @@ class PolygonTypeTest extends OrmTest
     {
         $entity = new PolygonEntity();
         $points = array(
-            new Point(0, 0),
-            new Point(10, 0),
-            new Point(10, 10),
-            new Point(0, 10),
+            array(
+                new Point(0, 0),
+                new Point(10, 0),
+                new Point(10, 10),
+                new Point(0, 10),
+            )
         );
 
 

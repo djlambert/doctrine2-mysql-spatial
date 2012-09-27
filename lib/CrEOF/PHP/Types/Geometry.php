@@ -9,38 +9,22 @@ use CrEOF\Exception\InvalidValueException;
  */
 abstract class Geometry
 {
-    const ARRAY_VALUES = 1;
-    const POINT_VALUES = 2;
-
-    /**
-     * @var array $points
-     */
-    protected $points = array();
-
-    protected function validatePoint($point, $type = null)
+    protected function validatePoint($point)
     {
-        if ($type && $type != self::POINT_VALUES) {
-            throw InvalidValueException::mixedValues();
-        }
-
         if (!($point instanceof Point)) {
             throw InvalidValueException::valueNotPoint();
         }
 
-        return self::POINT_VALUES;
+        return true;
     }
 
-    protected function validatePointArray(array $array, $type = null)
+    protected function validatePointArray(array $array)
     {
-        if ($type && $type != self::ARRAY_VALUES) {
-            throw InvalidValueException::mixedValues();
-        }
-
         foreach ($array as $point) {
             $this->validatePoint($point);
         }
 
-        return self::ARRAY_VALUES;
+        return true;
     }
 
     protected function getPointArrayString(array $points)

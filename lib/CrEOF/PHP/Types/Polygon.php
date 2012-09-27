@@ -11,32 +11,29 @@ use CrEOF\PHP\Types\Point;
 class Polygon extends Geometry
 {
     /**
-     * @var int $pointsType
+     * @var array $polygons
      */
-    protected $pointsType;
+    protected $polygons = array();
 
     /**
-     * @param array $points
+     * @param array $polygons
      *
      * @throws InvalidValueException
      */
-    public function __construct(array $points)
+    public function __construct(array $polygons)
     {
-        $this->setPoints($points);
+        $this->setPolygons($polygons);
     }
 
     /**
-     * @param Point|array $point
+     * @param array $polygon
      *
      * @return self
      * @throws InvalidValueException
      */
-    public function addPoint($point)
+    public function addPolygon(array $polygon)
     {
-        if ($this->pointsType && $this->pointsType != gettype($point)) {
-            throw InvalidValueException::mixedValues();
-        }
-        $this->points[] = $point;
+        $this->polygons[] = $polygon;
 
         return $this;
     }
@@ -44,21 +41,21 @@ class Polygon extends Geometry
     /**
      * @return array
      */
-    public function getPoints()
+    public function getPolygons()
     {
-        return $this->points;
+        return $this->polygons;
     }
 
     /**
-     * @param array $points
+     * @param array $polygons
      *
      * @return self
      */
-    public function setPoints(array $points)
+    public function setPolygons(array $polygons)
     {
-        $this->validatePolygonArray($points);
+        $this->validatePolygonArray($polygons);
 
-        $this->points = $points;
+        $this->polygons = $polygons;
 
         return $this;
     }
@@ -68,15 +65,11 @@ class Polygon extends Geometry
      */
     public function __toString()
     {
-        return 'POLYGON(' . $this->getPolygonArrayString($this->points) . ')';
+        return 'POLYGON(' . $this->getPolygonArrayString($this->polygons) . ')';
     }
 
     private function getPolygonArrayString(array $points)
     {
-        if ($this->pointsType == self::POINT_VALUES) {
-            return $this->getPointArrayString($points);
-        }
-
         $string = null;
 
         foreach ($points as $array) {
@@ -91,13 +84,10 @@ class Polygon extends Geometry
         foreach ($array as $value) {
             switch (gettype($value)) {
                 case 'array':
-                    $this->pointsType = $this->validatePointArray($value, $this->pointsType);
-                    break;
-                case 'object':
-                    $this->pointsType = $this->validatePoint($value, $this->pointsType);
+                    $this->validatePointArray($value);
                     break;
                 default:
-                    throw new InvalidValueException('Value not of type Point or array!!');
+                    throw InvalidValueException::valueNotArray();
                     break;
             }
         }

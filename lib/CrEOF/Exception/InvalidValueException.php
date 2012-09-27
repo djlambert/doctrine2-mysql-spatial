@@ -10,6 +10,11 @@ class InvalidValueException extends Exception
         return new self('Value not of type Point!');
     }
 
+    static public function valueNotArray()
+    {
+        return new self('Value not an array!');
+    }
+
     static public function mixedValues()
     {
         return new self('Cannot mix array and Point values!');
