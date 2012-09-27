@@ -12,6 +12,11 @@ abstract class Geometry
     const ARRAY_VALUE = 1;
     const POINT_VALUE = 2;
 
+    /**
+     * @var array $points
+     */
+    protected $points = array();
+
     protected function validatePoint($point, $type = null)
     {
         if ($type && $type != self::POINT_VALUE) {

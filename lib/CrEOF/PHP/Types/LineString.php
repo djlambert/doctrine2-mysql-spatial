@@ -11,11 +11,6 @@ use CrEOF\PHP\Types\Point;
 class LineString extends Geometry
 {
     /**
-     * @var array $points
-     */
-    protected $points = array();
-
-    /**
      * @param array $points
      *
      * @throws InvalidValueException
