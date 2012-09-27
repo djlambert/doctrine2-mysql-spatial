@@ -28,4 +28,11 @@ class LineStringTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(4, $lineString->getPoints());
     }
+
+    public function testBadLineString()
+    {
+        $this->setExpectedException('CrEOF\Exception\InvalidValueException');
+
+        $lineString = new LineString(array(1, 2, 3 ,4));
+    }
 }
