@@ -13,7 +13,7 @@ class GLength extends FunctionNode
     /**
      * @var \Doctrine\ORM\Query\AST\Node
      */
-    public $firstPointExpression;
+    public $geomExpression;
 
     /**
      * @var \Doctrine\ORM\Query\AST\Node
@@ -25,11 +25,7 @@ class GLength extends FunctionNode
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        return 'GLength(LineString(' .
-            $this->firstPointExpression->dispatch($sqlWalker) .
-            ', ' .
-            $this->secondPointExpression->dispatch($sqlWalker) .
-            '))';
+        return 'GLength(' . $this->geomExpression->dispatch($sqlWalker) . ')';
     }
 
     /**
@@ -40,11 +36,7 @@ class GLength extends FunctionNode
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
 
-        $this->firstPointExpression = $parser->ArithmeticPrimary();
-
-        $parser->match(Lexer::T_COMMA);
-
-        $this->secondPointExpression = $parser->ArithmeticPrimary();
+        $this->geomExpression = $parser->ArithmeticPrimary();
 
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
