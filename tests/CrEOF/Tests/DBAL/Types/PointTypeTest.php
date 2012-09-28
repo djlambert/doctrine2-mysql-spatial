@@ -64,4 +64,19 @@ class PointTypeTest extends OrmTest
         $queryEntity = $this->_em->getRepository(self::POINT_ENTITY)->find($id);
         $this->assertEquals($entity, $queryEntity);
     }
+
+    public function testFindByPoint()
+    {
+        $entity = new PointEntity();
+        $entity->setPoint(new Point(42.6525793, -73.7562317));
+        $this->_em->persist($entity);
+        $this->_em->flush();
+
+        $id = $entity->getId();
+
+        $this->_em->clear();
+
+        $result = $this->_em->getRepository(self::POINT_ENTITY)->findByPoint(new Point(42.6525793, -73.7562317));
+        $this->assertEquals($entity, $result[0]);
+    }
 }

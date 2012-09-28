@@ -74,4 +74,27 @@ class LineStringTypeTest extends OrmTest
         $queryEntity = $this->_em->getRepository(self::LINESTRING_ENTITY)->find($id);
         $this->assertEquals($entity, $queryEntity);
     }
+
+    public function testFindByLineString()
+    {
+        $lineString = new LineString(
+            array(
+                 new Point(42.6525793, -73.7562317),
+                 new Point(48.5793, 34.034),
+                 new Point(-75.371, 87.90424)
+            ));
+        $entity = new LineStringEntity();
+
+        $entity->setLineString($lineString);
+
+        $this->_em->persist($entity);
+        $this->_em->flush();
+
+        $id = $entity->getId();
+
+        $this->_em->clear();
+
+        $result = $this->_em->getRepository(self::LINESTRING_ENTITY)->findByLineString($lineString);
+        $this->assertEquals($entity, $result[0]);
+    }
 }

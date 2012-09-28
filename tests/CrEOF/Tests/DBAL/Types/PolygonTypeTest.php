@@ -134,4 +134,27 @@ class PolygonTypeTest extends OrmTest
         $queryEntity = $this->_em->getRepository(self::POLYGON_ENTITY)->find($id);
         $this->assertNull($queryEntity->getPolygon());
     }
+
+    public function testFindByPolygon()
+    {
+        $entity = new PolygonEntity();
+        $lineStrings = array(
+            array(
+                new Point(0, 0),
+                new Point(10, 0),
+                new Point(10, 10),
+                new Point(0, 10),
+                new Point(0, 0)
+            )
+        );
+
+        $entity->setPolygon(new Polygon($lineStrings));
+        $this->_em->persist($entity);
+        $this->_em->flush();
+        $this->_em->clear();
+
+        $result = $this->_em->getRepository(self::POLYGON_ENTITY)->findByPolygon(new Polygon($lineStrings));
+
+        $this->assertEquals($entity, $result[0]);
+    }
 }
