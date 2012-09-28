@@ -55,7 +55,7 @@ class PolygonTypeTest extends OrmTest
     public function testSolidPolygon()
     {
         $entity = new PolygonEntity();
-        $points = array(
+        $lineStrings = array(
             array(
                 new Point(0, 0),
                 new Point(10, 0),
@@ -65,7 +65,7 @@ class PolygonTypeTest extends OrmTest
             )
         );
 
-        $entity->setPolygon(new Polygon($points));
+        $entity->setPolygon(new Polygon($lineStrings));
         $this->_em->persist($entity);
         $this->_em->flush();
 
@@ -80,7 +80,7 @@ class PolygonTypeTest extends OrmTest
     public function testPolygonRing()
     {
         $entity = new PolygonEntity();
-        $points = array(
+        $lineStrings = array(
             array(
                 new Point(0, 0),
                 new Point(10, 0),
@@ -97,7 +97,7 @@ class PolygonTypeTest extends OrmTest
             )
         );
 
-        $entity->setPolygon(new Polygon($points));
+        $entity->setPolygon(new Polygon($lineStrings));
         $this->_em->persist($entity);
         $this->_em->flush();
 
@@ -112,7 +112,7 @@ class PolygonTypeTest extends OrmTest
     public function testBadPolygon()
     {
         $entity = new PolygonEntity();
-        $points = array(
+        $lineStrings = array(
             array(
                 new Point(0, 0),
                 new Point(10, 0),
@@ -122,7 +122,7 @@ class PolygonTypeTest extends OrmTest
         );
 
 
-        $entity->setPolygon(new Polygon($points));
+        $entity->setPolygon(new Polygon($lineStrings));
 
         $this->_em->persist($entity);
         $this->_em->flush();

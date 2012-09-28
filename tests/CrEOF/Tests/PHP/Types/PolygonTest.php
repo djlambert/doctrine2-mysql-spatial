@@ -44,7 +44,7 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
 
     public function testGoodSolidPolygon()
     {
-        $points = array(
+        $lineStrings = array(
             array(
                 new Point(0, 0),
                 new Point(10, 0),
@@ -54,14 +54,14 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $polygon = new Polygon($points);
+        $polygon = new Polygon($lineStrings);
 
-        $this->assertEquals($points, $polygon->getPolygons());
+        $this->assertEquals($lineStrings, $polygon->getPolygons());
     }
 
     public function testGoodPolygonRing()
     {
-        $points = array(
+        $lineStrings = array(
             array(
                 new Point(0, 0),
                 new Point(10, 0),
@@ -78,16 +78,16 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $polygon = new Polygon($points);
+        $polygon = new Polygon($lineStrings);
 
-        $this->assertEquals($points, $polygon->getPolygons());
+        $this->assertEquals($lineStrings, $polygon->getPolygons());
     }
 
     public function testBadPolygon()
     {
         $this->setExpectedException('CrEOF\Exception\InvalidValueException');
 
-        $points = array(
+        $lineStrings = array(
             array(
                 new Point(0, 0),
                 new Point(10, 0),
@@ -99,11 +99,11 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
             new Point(7, 5)
         );
 
-        $polygon = new Polygon($points);
+        $polygon = new Polygon($lineStrings);
     }
     public function testToString()
     {
-        $points = array(
+        $lineStrings = array(
             array(
                 new Point(0, 0),
                 new Point(10, 0),
@@ -119,7 +119,7 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
                 new Point(5, 5)
             )
         );
-        $polygon = new Polygon($points);
+        $polygon = new Polygon($lineStrings);
         $result  = (string) $polygon;
 
         $this->assertEquals('POLYGON((0 0, 10 0, 10 10, 0 10, 0 0), (5 5, 7 5, 7 7, 5 7, 5 5))', $result);
