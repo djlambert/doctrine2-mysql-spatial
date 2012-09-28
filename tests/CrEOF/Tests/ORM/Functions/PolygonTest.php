@@ -38,7 +38,7 @@ use CrEOF\Tests\Fixtures\PolygonEntity;
  */
 class PolygonTest extends OrmTest
 {
-    public function testMBRContainsParameters()
+    public function testPolygonParameters()
     {
         $lineString1 = array(
             new Point(0, 0),
