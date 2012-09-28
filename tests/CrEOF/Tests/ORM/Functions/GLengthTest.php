@@ -24,8 +24,10 @@
 namespace CrEOF\Tests\ORM\Functions;
 
 use Doctrine\ORM\Query;
+use CrEOF\PHP\Types\LineString;
 use CrEOF\PHP\Types\Point;
 use CrEOF\Tests\Fixtures\PointEntity;
+use CrEOF\Tests\Fixtures\LineStringEntity;
 use CrEOF\Tests\OrmTest;
 
 /**
@@ -64,5 +66,38 @@ class GLengthTest extends OrmTest
 
         $this->assertCount(1, $result);
         $this->assertEquals($entity1, $result[0]);
+    }
+
+    public function testGLengthParameter()
+    {
+        $points = array(
+            new Point(0, 0),
+            new Point(1, 1),
+            new Point(2, 2),
+            new Point(3, 3)
+        );
+        $lineString = new LineString($points);
+        $entity     = new LineStringEntity();
+
+        $entity->setLineString(new LineString(
+            array(
+                 new Point(0, 0),
+                 new Point(1, 1),
+                 new Point(2, 2)
+            ))
+        );
+
+        $this->_em->persist($entity);
+        $this->_em->flush();
+        $this->_em->clear();
+
+        $query = $this->_em->createQuery('SELECT l FROM CrEOF\Tests\Fixtures\LineStringEntity l WHERE GLength(:p1) > GLength(l.lineString)');
+
+        $query->setParameter('p1', $lineString);
+
+        $result = $query->getResult();
+
+        $this->assertCount(1, $result);
+        $this->assertEquals($entity, $result[0]);
     }
 }

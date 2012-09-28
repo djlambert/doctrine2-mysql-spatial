@@ -32,7 +32,7 @@ use Doctrine\ORM\Query\Lexer;
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class GLength extends FunctionNode
+class GLength extends DQLFunction
 {
     /**
      * @var \Doctrine\ORM\Query\AST\Node
@@ -49,7 +49,7 @@ class GLength extends FunctionNode
      */
     public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
     {
-        return 'GLength(' . $this->geomExpression->dispatch($sqlWalker) . ')';
+        return 'GLength(' . $this->dispatchValue($sqlWalker, $this->geomExpression) . ')';
     }
 
     /**
