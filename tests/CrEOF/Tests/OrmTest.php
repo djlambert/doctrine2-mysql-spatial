@@ -69,6 +69,17 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->getConfiguration()->addCustomNumericFunction('mbrdisjoint', 'CrEOF\ORM\Query\AST\Functions\MBRDisjoint');
         $this->_em->getConfiguration()->addCustomNumericFunction('mbrequal', 'CrEOF\ORM\Query\AST\Functions\MBREqual');
         $this->_em->getConfiguration()->addCustomNumericFunction('mbrintersects', 'CrEOF\ORM\Query\AST\Functions\MBRIntersects');
+        $this->_em->getConfiguration()->addCustomNumericFunction('mbroverlaps', 'CrEOF\ORM\Query\AST\Functions\MBROverlaps');
+        $this->_em->getConfiguration()->addCustomNumericFunction('mbrtouches', 'CrEOF\ORM\Query\AST\Functions\MBRTouches');
+        $this->_em->getConfiguration()->addCustomNumericFunction('mbrwithin', 'CrEOF\ORM\Query\AST\Functions\MBRWithin');
+        $this->_em->getConfiguration()->addCustomNumericFunction('contains', 'CrEOF\ORM\Query\AST\Functions\Contains');
+        $this->_em->getConfiguration()->addCustomNumericFunction('crosses', 'CrEOF\ORM\Query\AST\Functions\Crosses');
+        $this->_em->getConfiguration()->addCustomNumericFunction('disjoint', 'CrEOF\ORM\Query\AST\Functions\Disjoint');
+        $this->_em->getConfiguration()->addCustomNumericFunction('equals', 'CrEOF\ORM\Query\AST\Functions\Equals');
+        $this->_em->getConfiguration()->addCustomNumericFunction('intersects', 'CrEOF\ORM\Query\AST\Functions\Intersects');
+        $this->_em->getConfiguration()->addCustomNumericFunction('overlaps', 'CrEOF\ORM\Query\AST\Functions\Overlaps');
+        $this->_em->getConfiguration()->addCustomNumericFunction('touches', 'CrEOF\ORM\Query\AST\Functions\Touches');
+        $this->_em->getConfiguration()->addCustomNumericFunction('within', 'CrEOF\ORM\Query\AST\Functions\Within');
         $this->_em->getConfiguration()->addCustomStringFunction('geomfromtext', 'CrEOF\ORM\Query\AST\Functions\GeomFromText');
         $this->_em->getConfiguration()->addCustomStringFunction('geometrytype', 'CrEOF\ORM\Query\AST\Functions\GeometryType');
         $this->_em->getConfiguration()->addCustomStringFunction('linestring', 'CrEOF\ORM\Query\AST\Functions\LineString');
