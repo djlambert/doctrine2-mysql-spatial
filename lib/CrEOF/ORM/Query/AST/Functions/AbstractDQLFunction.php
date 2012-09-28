@@ -33,7 +33,7 @@ use Doctrine\ORM\Query\SqlWalker;
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-abstract class DQLFunction extends FunctionNode
+abstract class AbstractDQLFunction extends FunctionNode
 {
     /**
      * @param SqlWalker $sqlWalker

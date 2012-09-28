@@ -32,7 +32,7 @@ use Doctrine\ORM\Query\Lexer;
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class GLength extends DQLFunction
+class GLength extends AbstractDQLFunction
 {
     /**
      * @var \Doctrine\ORM\Query\AST\Node
