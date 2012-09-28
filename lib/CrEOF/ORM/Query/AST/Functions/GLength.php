@@ -32,36 +32,7 @@ use Doctrine\ORM\Query\Lexer;
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class GLength extends AbstractDQLFunction
+class GLength extends AbstractGeometryFunction
 {
-    /**
-     * @var \Doctrine\ORM\Query\AST\Node
-     */
-    public $geomExpression;
-
-    /**
-     * @var \Doctrine\ORM\Query\AST\Node
-     */
-    public $secondPointExpression;
-
-    /**
-     * @inheritdoc
-     */
-    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
-    {
-        return 'GLength(' . $this->dispatchValue($sqlWalker, $this->geomExpression) . ')';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function parse(\Doctrine\ORM\Query\Parser $parser)
-    {
-        $parser->match(Lexer::T_IDENTIFIER);
-        $parser->match(Lexer::T_OPEN_PARENTHESIS);
-
-        $this->geomExpression = $parser->ArithmeticPrimary();
-
-        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
-    }
+    protected $functionName = 'GLength';
 }

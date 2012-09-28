@@ -27,12 +27,41 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * Area DQL function
+ * Abstract DQL function requiring 1 geometry parameter
  *
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class Area extends AbstractGeometryFunction
+class AbstractGeometryFunction extends AbstractDQLFunction
 {
-    protected $functionName = 'Area';
+    /**
+     * @var \Doctrine\ORM\Query\AST\Node
+     */
+    public $geomExpression;
+
+    /**
+     * @var string
+     */
+    protected $functionName;
+
+    /**
+     * @inheritdoc
+     */
+    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
+    {
+        return $this->functionName . '(' . $this->dispatchValue($sqlWalker, $this->geomExpression) . ')';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function parse(\Doctrine\ORM\Query\Parser $parser)
+    {
+        $parser->match(Lexer::T_IDENTIFIER);
+        $parser->match(Lexer::T_OPEN_PARENTHESIS);
+
+        $this->geomExpression = $parser->ArithmeticPrimary();
+
+        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
+    }
 }

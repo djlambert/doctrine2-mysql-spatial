@@ -32,31 +32,7 @@ use Doctrine\ORM\Query\Lexer;
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class NumInteriorRings extends FunctionNode
+class NumInteriorRings extends AbstractGeometryFunction
 {
-    /**
-     * @var \Doctrine\ORM\Query\AST\Node
-     */
-    public $geomExpression;
-
-    /**
-     * @inheritdoc
-     */
-    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
-    {
-        return 'NumInteriorRings(' . $this->geomExpression->dispatch($sqlWalker) . ')';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function parse(\Doctrine\ORM\Query\Parser $parser)
-    {
-        $parser->match(Lexer::T_IDENTIFIER);
-        $parser->match(Lexer::T_OPEN_PARENTHESIS);
-
-        $this->geomExpression = $parser->ArithmeticPrimary();
-
-        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
-    }
+    protected $functionName = 'NumInteriorRings';
 }
