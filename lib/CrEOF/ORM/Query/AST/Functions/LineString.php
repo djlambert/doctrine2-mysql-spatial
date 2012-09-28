@@ -32,7 +32,7 @@ use Doctrine\ORM\Query\Lexer;
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class LineString extends FunctionNode
+class LineString extends DQLFunction
 {
     /**
      * @var \Doctrine\ORM\Query\AST\Node
@@ -82,17 +82,5 @@ class LineString extends FunctionNode
         $result .= ')';
 
         return $result;
-    }
-
-    public function dispatchValue(\Doctrine\ORM\Query\SqlWalker $sqlWalker, $value)
-    {
-        switch (get_class($value)) {
-            case 'Doctrine\ORM\Query\AST\InputParameter':
-                return 'GeomFromText(' . $value->dispatch($sqlWalker) . ')';
-                break;
-            default:
-                return $value->dispatch($sqlWalker);
-                break;
-        }
     }
 }

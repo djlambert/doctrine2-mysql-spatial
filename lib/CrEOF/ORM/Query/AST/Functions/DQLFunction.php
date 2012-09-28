@@ -25,58 +25,31 @@ namespace CrEOF\ORM\Query\AST\Functions;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
+use Doctrine\ORM\Query\SqlWalker;
 
 /**
- * Polygon DQL function
+ * Abstract DQL function class
  *
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class Polygon extends DQLFunction
+abstract class DQLFunction extends FunctionNode
 {
     /**
-     * @var \Doctrine\ORM\Query\AST\Node
+     * @param SqlWalker $sqlWalker
+     * @param mixed     $value
+     *
+     * @return string
      */
-    public $firstLineStringExpression;
-
-    public $lineStringExpressions = array();
-
-    /**
-     * @inheritdoc
-     */
-    public function parse(\Doctrine\ORM\Query\Parser $parser)
+    public function dispatchValue(SqlWalker $sqlWalker, $value)
     {
-        $lexer = $parser->getLexer();
-
-        $parser->match(Lexer::T_IDENTIFIER);
-        $parser->match(Lexer::T_OPEN_PARENTHESIS);
-
-        $this->firstLineStringExpression = $parser->StringPrimary();
-
-        while ($lexer->lookahead['type'] != Lexer::T_CLOSE_PARENTHESIS) {
-            $parser->match(Lexer::T_COMMA);
-
-            $this->lineStringExpressions[] = $parser->StringPrimary();
+        switch (get_class($value)) {
+            case 'Doctrine\ORM\Query\AST\InputParameter':
+                return 'GeomFromText(' . $value->dispatch($sqlWalker) . ')';
+                break;
+            default:
+                return $value->dispatch($sqlWalker);
+                break;
         }
-
-        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
-    {
-        $result = 'Polygon(';
-
-        $result .= $this->dispatchValue($sqlWalker, $this->firstLineStringExpression);
-
-        for ($i = 0, $size = count($this->lineStringExpressions); $i < $size; $i++) {
-            $result .= ', ' . $this->dispatchValue($sqlWalker, $this->lineStringExpressions[$i]);
-        }
-
-        $result .= ')';
-
-        return $result;
     }
 }
