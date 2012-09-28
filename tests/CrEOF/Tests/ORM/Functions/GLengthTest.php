@@ -29,7 +29,7 @@ class GLengthTest extends OrmTest
         $this->_em->flush();
         $this->_em->clear();
 
-        $query = $this->_em->createQuery('SELECT p FROM CrEOF\Tests\Fixtures\PointEntity p WHERE GLength(p.point, GeomFromText(:point)) > 10');
+        $query = $this->_em->createQuery('SELECT p FROM CrEOF\Tests\Fixtures\PointEntity p WHERE GLength(LineString(p.point, :point)) > 10');
 
         $query->setParameter('point', new Point(10, 10));
 
