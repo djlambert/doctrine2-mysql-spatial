@@ -27,12 +27,54 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * MBRContains DQL function
+ * Abstract DQL function requiring 2 geometry parameters
  *
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class MBRContains extends AbstractDualGeometryFunction
+class AbstractDualGeometryFunction extends AbstractDQLFunction
 {
-    protected $functionName = 'MBRContains';
+    /**
+     * @var \Doctrine\ORM\Query\AST\Node
+     */
+    public $firstGeomExpression;
+
+    /**
+     * @var \Doctrine\ORM\Query\AST\Node
+     */
+    public $secondGeomExpression;
+
+    /**
+     * @var string
+     */
+    protected $functionName;
+
+    /**
+     * @inheritdoc
+     */
+    public function getSql(\Doctrine\ORM\Query\SqlWalker $sqlWalker)
+    {
+        return $this->functionName . '(' .
+            $this->dispatchValue($sqlWalker, $this->firstGeomExpression) .
+            ', ' .
+            $this->dispatchValue($sqlWalker, $this->secondGeomExpression) .
+            ')';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function parse(\Doctrine\ORM\Query\Parser $parser)
+    {
+        $parser->match(Lexer::T_IDENTIFIER);
+        $parser->match(Lexer::T_OPEN_PARENTHESIS);
+
+        $this->firstGeomExpression = $parser->ArithmeticPrimary();
+
+        $parser->match(Lexer::T_COMMA);
+
+        $this->secondGeomExpression = $parser->ArithmeticPrimary();
+
+        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
+    }
 }
