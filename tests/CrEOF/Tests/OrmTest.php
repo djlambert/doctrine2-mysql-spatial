@@ -69,6 +69,7 @@ abstract class OrmTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->_em->getConfiguration()->addCustomStringFunction('geometrytype', 'CrEOF\ORM\Query\AST\Functions\GeometryType');
         $this->_em->getConfiguration()->addCustomStringFunction('linestring', 'CrEOF\ORM\Query\AST\Functions\LineString');
         $this->_em->getConfiguration()->addCustomStringFunction('point', 'CrEOF\ORM\Query\AST\Functions\Point');
+        $this->_em->getConfiguration()->addCustomStringFunction('polygon', 'CrEOF\ORM\Query\AST\Functions\Polygon');
     }
 
     protected function tearDown()
