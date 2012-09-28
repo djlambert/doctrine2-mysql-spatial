@@ -51,12 +51,12 @@ class LineString extends AbstractDQLFunction
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
 
-        $this->firstPointExpression = $parser->StringPrimary();
+        $this->firstPointExpression = $parser->ArithmeticPrimary();
 
         while (count($this->pointExpressions) < 1 || $lexer->lookahead['type'] != Lexer::T_CLOSE_PARENTHESIS) {
             $parser->match(Lexer::T_COMMA);
 
-            $this->pointExpressions[] = $parser->StringPrimary();
+            $this->pointExpressions[] = $parser->ArithmeticPrimary();
         }
 
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);

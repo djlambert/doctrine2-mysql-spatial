@@ -51,7 +51,7 @@ class Polygon extends AbstractDQLFunction
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
 
-        $this->firstLineStringExpression = $parser->StringPrimary();
+        $this->firstLineStringExpression = $parser->ArithmeticPrimary();
 
         while ($lexer->lookahead['type'] != Lexer::T_CLOSE_PARENTHESIS) {
             $parser->match(Lexer::T_COMMA);
