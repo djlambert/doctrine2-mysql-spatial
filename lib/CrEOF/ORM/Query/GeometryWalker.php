@@ -58,8 +58,7 @@ class GeometryWalker extends SqlWalker
     public function walkSelectExpression($selectExpression)
     {
         $expr = $selectExpression->expression;
-
-        $sql = parent::walkSelectExpression($selectExpression);
+        $sql  = parent::walkSelectExpression($selectExpression);
 
         if ($expr instanceof ReturnsGeometryTypeInterface && !$selectExpression->hiddenAliasResultVariable) {
             $pattern = '/.+AS ((\w+)(\d+))$/';
