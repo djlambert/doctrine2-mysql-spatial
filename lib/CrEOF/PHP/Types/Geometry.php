@@ -80,7 +80,7 @@ abstract class Geometry
         $string = null;
 
         foreach ($points as $point) {
-            $string .= ($string ? ', ': null) . $point->getValue();
+            $string .= ($string ? ',': null) . $point->getValue();
         }
 
         return $string;

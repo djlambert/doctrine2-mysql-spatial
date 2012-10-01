@@ -105,7 +105,7 @@ class Polygon extends Geometry
         $string = null;
 
         foreach ($points as $array) {
-            $string .= ($string ? ', ': null) . '(' . $this->getPointArrayString($array) . ')';
+            $string .= ($string ? ',': null) . '(' . $this->getPointArrayString($array) . ')';
         }
 
         return $string;

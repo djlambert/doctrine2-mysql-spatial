@@ -122,6 +122,6 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
         $polygon = new Polygon($lineStrings);
         $result  = (string) $polygon;
 
-        $this->assertEquals('Polygon((0 0, 10 0, 10 10, 0 10, 0 0), (5 5, 7 5, 7 7, 5 7, 5 5))', $result);
+        $this->assertEquals('Polygon((0 0,10 0,10 10,0 10,0 0),(5 5,7 5,7 7,5 7,5 5))', $result);
     }
 }
