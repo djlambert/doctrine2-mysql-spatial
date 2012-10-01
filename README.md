@@ -41,6 +41,7 @@ Add MySQL spatial extension support to Doctrine2.
 * Within
 * EndPoint
 * StartPoint
+* AsText
 * PointN (todo)
 * Envelope (todo)
 * ExteriorRing (todo)
