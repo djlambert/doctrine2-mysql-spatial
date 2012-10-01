@@ -33,6 +33,28 @@ use CrEOF\Exception\InvalidValueException;
  */
 abstract class Geometry
 {
+    const POINT      = 'Point';
+    const LINESTRING = 'LineString';
+    const POLYGON    = 'Polygon';
+
+    /**
+     * @return string
+     */
+    abstract public function getType();
+
+    /**
+     * @return string
+     */
+    abstract public function getValue();
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('%s(%s)', $this->getType(), $this->getValue());
+    }
+
     protected function isValidPoint($point)
     {
         if (!($point instanceof Point)) {
@@ -58,7 +80,7 @@ abstract class Geometry
         $string = null;
 
         foreach ($points as $point) {
-            $string .= ($string ? ', ': null) . $point->getCoordinates();
+            $string .= ($string ? ', ': null) . $point->getValue();
         }
 
         return $string;

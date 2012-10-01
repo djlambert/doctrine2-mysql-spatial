@@ -87,9 +87,17 @@ class Polygon extends Geometry
     /**
      * @return string
      */
-    public function __toString()
+    public function getValue()
     {
-        return 'POLYGON(' . $this->getPolygonArrayString($this->polygons) . ')';
+        return $this->getPolygonArrayString($this->polygons);
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return self::POLYGON;
     }
 
     private function getPolygonArrayString(array $points)

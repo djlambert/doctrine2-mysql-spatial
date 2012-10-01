@@ -56,15 +56,7 @@ class Point extends Geometry
     /**
      * @return string
      */
-    public function __toString()
-    {
-        return sprintf('POINT(%s %s)', $this->latitude, $this->longitude);
-    }
-
-    /**
-     * @return string
-     */
-    public function getCoordinates()
+    public function getValue()
     {
         return sprintf('%s %s', $this->latitude, $this->longitude);
     }
@@ -107,6 +99,14 @@ class Point extends Geometry
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return self::POINT;
     }
 
     /**
