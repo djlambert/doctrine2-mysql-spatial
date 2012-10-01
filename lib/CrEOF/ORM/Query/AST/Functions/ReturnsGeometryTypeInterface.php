@@ -23,16 +23,13 @@
 
 namespace CrEOF\ORM\Query\AST\Functions;
 
-use Doctrine\ORM\Query\AST\Functions\FunctionNode;
-use Doctrine\ORM\Query\Lexer;
-
 /**
- * AsText DQL function
+ * Interface to indicate function returns a geometry value
  *
  * @author  Derek J. Lambert <dlambert@dereklambert.com>
  * @license http://dlambert.mit-license.org MIT
  */
-class AsText extends AbstractGeometryFunction implements ReturnsGeometryTypeInterface
+interface ReturnsGeometryTypeInterface
 {
-    protected $functionName = 'AsText';
+
 }
