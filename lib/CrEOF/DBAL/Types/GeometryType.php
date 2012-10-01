@@ -157,5 +157,4 @@ class GeometryType extends Type
 
         return $parser->parse($string);
     }
-
 }
