@@ -49,8 +49,8 @@ class Point extends Geometry
      */
     public function __construct($latitude, $longitude)
     {
-        $this->latitude = $this->toFloat($latitude);
-        $this->longitude = $this->toFloat($longitude);
+        $this->setLatitude($latitude)
+            ->setLongitude($longitude);
     }
 
     /**
